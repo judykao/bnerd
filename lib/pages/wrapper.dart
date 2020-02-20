@@ -1,6 +1,6 @@
 import 'package:bnerd/authentication/authenticate.dart';
 import 'package:bnerd/model/user.dart';
-import 'package:bnerd/pages/home.dart';
+import 'package:bnerd/pages/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

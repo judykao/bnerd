@@ -13,7 +13,6 @@ class DataBaseService {
   Future updateUserData(String cla, String number, String name) async {
     return await userCollection.document(uid).setData({
       'cla': cla,
-
       'number': number,
       'name': name,
     });

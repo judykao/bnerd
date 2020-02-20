@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bnerd/shared/load.dart';
 import 'package:bnerd/services/auth.dart';
 
+
 class Signin extends StatefulWidget {
 
   //
@@ -82,198 +83,186 @@ class _SigninState extends State<Signin> {
             ],
           ),
           SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 60.0),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/logo_rmbg.png',
-                        width: ScreenUtil.getInstance().setWidth(160),
-                        height: ScreenUtil.getInstance().setHeight(160),
-                      ),
-                      Text("BNerd",
-                          style: TextStyle(
-                              fontFamily: "Poppins-Bold",
-                              fontSize: ScreenUtil.getInstance().setSp(46),
-                              letterSpacing: .6,
-                              fontWeight: FontWeight.bold
-                          )
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(180),
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: ScreenUtil.getInstance().setHeight(500),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8.0),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black12,
-                              offset: Offset(0.0, 15.0),
-                              blurRadius: 15.0),
-                          BoxShadow(
-                              color: Colors.black12,
-                              offset: Offset(0.0, -10.0),
-                              blurRadius: 10.0),
-                        ]),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text("Login",
-                              style: TextStyle(
-                                  fontSize: ScreenUtil.getInstance().setSp(45),
-                                  fontFamily: "Poppins-Bold",
-                                  letterSpacing: .6)),
-                          SizedBox(
-                            height: ScreenUtil.getInstance().setHeight(30),
-                          ),
-                          Text("Username",
-                              style: TextStyle(
-                                  fontFamily: "Poppins-Medium",
-                                  fontSize: ScreenUtil.getInstance().setSp(26))),
-                          TextFormField(
-                            decoration: textInputDecoration.copyWith(hintText: 'Email', hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
-                            validator: (val) =>val.isEmpty ? 'Enter an email' : null,
-                            onChanged: (val) {
-                              setState(() => email = val);
-                            },
-                          ),
-                          SizedBox(
-                            height: ScreenUtil.getInstance().setHeight(30),
-                          ),
-                          Text("PassWord",
-                              style: TextStyle(
-                                  fontFamily: "Poppins-Medium",
-                                  fontSize: ScreenUtil.getInstance().setSp(26))),
-                          TextFormField(
-                            obscureText: true,
-                            decoration: textInputDecoration.copyWith(hintText: 'Password', hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
-                            validator: (val) =>val.length < 6 ? 'Enter a password 6+ chars long' : null,
-                            onChanged: (val) {
-                              setState(() => password = val);
-                            },
-                          ),
-                          SizedBox(
-                            height: ScreenUtil.getInstance().setHeight(35),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              Text(
-                                "Forgot Password?",
+            child: Form(
+              key: _formKey,
+              child: Padding(
+                padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 60.0),
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/logo_rmbg.png',
+                          width: ScreenUtil.getInstance().setWidth(160),
+                          height: ScreenUtil.getInstance().setHeight(160),
+                        ),
+                        Text("BNerd",
+                            style: TextStyle(
+                                fontFamily: "Poppins-Bold",
+                                fontSize: ScreenUtil.getInstance().setSp(46),
+                                letterSpacing: .6,
+                                fontWeight: FontWeight.bold
+                            )
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(180),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: ScreenUtil.getInstance().setHeight(500),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8.0),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black12,
+                                offset: Offset(0.0, 15.0),
+                                blurRadius: 15.0),
+                            BoxShadow(
+                                color: Colors.black12,
+                                offset: Offset(0.0, -10.0),
+                                blurRadius: 10.0),
+                          ]),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text("Login",
                                 style: TextStyle(
-                                    color: Colors.blue,
+                                    fontSize: ScreenUtil.getInstance().setSp(45),
+                                    fontFamily: "Poppins-Bold",
+                                    letterSpacing: .6)),
+                            SizedBox(
+                              height: ScreenUtil.getInstance().setHeight(30),
+                            ),
+                            Text("Username",
+                                style: TextStyle(
                                     fontFamily: "Poppins-Medium",
-                                    fontSize: ScreenUtil.getInstance().setSp(28)),
-                              )
-                            ],
-                          )
-                        ],
+                                    fontSize: ScreenUtil.getInstance().setSp(26))),
+                            TextFormField(
+                              decoration: textInputDecoration.copyWith(hintText: 'Email', hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+                              validator: (val) =>val.isEmpty ? 'Enter an email' : null,
+                              onChanged: (val) {
+                                setState(() => email = val);
+                              },
+                            ),
+                            SizedBox(
+                              height: ScreenUtil.getInstance().setHeight(30),
+                            ),
+                            Text("PassWord",
+                                style: TextStyle(
+                                    fontFamily: "Poppins-Medium",
+                                    fontSize: ScreenUtil.getInstance().setSp(26))),
+                            TextFormField(
+                              obscureText: true,
+                              decoration: textInputDecoration.copyWith(hintText: 'Password', hintStyle: TextStyle(color: Colors.grey, fontSize: 12.0)),
+                              validator: (val) =>val.length < 6 ? 'Enter a password 6+ chars long' : null,
+                              onChanged: (val) {
+                                setState(() => password = val);
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 12.0,
-                          ),
-                          GestureDetector(
-                            onTap: _radio,
-                            child: radioButton(_isSelected),
-                          ),
-                          SizedBox(
-                            width: 8.0,
-                          ),
-                          Text("Remember me",
-                              style: TextStyle(
-                                  fontSize: 12, fontFamily: "Poppins-Medium"
-                              )
-                          )
-                        ],
-                      ),
-                      InkWell(
-                        child: Container(
-                          width: ScreenUtil.getInstance().setWidth(330),
-                          height: ScreenUtil.getInstance().setHeight(100),
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Color(0xFF17ead9),
-                                Color(0xFF6078ea)
-                              ]),
-                              borderRadius: BorderRadius.circular(6.0),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xFF6078ea).withOpacity(.3),
-                                    offset: Offset(0.0, 8.0),
-                                    blurRadius: 8.0)
-                              ]),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () async {
-                                if (_formKey.currentState.validate()){
-                                  setState(() => loading = true);
-                                  dynamic result = await _auth.signInWithEmailandPassword(email, password);
-                                  if(result == null){
-                                    setState(() {
-                                      error = 'could not sign in with those cedentials';
-                                      loading = false;
-                                    });
+                    SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 12.0,
+                            ),
+                            GestureDetector(
+                              onTap: _radio,
+                              child: radioButton(_isSelected),
+                            ),
+                            SizedBox(
+                              width: 8.0,
+                            ),
+                            Text("Remember me",
+                                style: TextStyle(
+                                    fontSize: 12, fontFamily: "Poppins-Medium"
+                                )
+                            )
+                          ],
+                        ),
+                        InkWell(
+                          child: Container(
+                            width: ScreenUtil.getInstance().setWidth(330),
+                            height: ScreenUtil.getInstance().setHeight(100),
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(colors: [
+                                  Color(0xFF17ead9),
+                                  Color(0xFF6078ea)
+                                ]),
+                                borderRadius: BorderRadius.circular(6.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Color(0xFF6078ea).withOpacity(.3),
+                                      offset: Offset(0.0, 8.0),
+                                      blurRadius: 8.0)
+                                ]),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () async {
+                                  if (_formKey.currentState.validate()){
+                                    setState(() => loading = true);
+                                    dynamic result = await _auth.signInWithEmailandPassword(email, password);
+                                    if(result == null){
+                                      setState(() {
+                                        error = 'could not sign in with those cedentials';
+                                        loading = false;
+                                      });
+                                    }
                                   }
-                                }
-                              },
-                              child: Center(
-                                child: Text("SIGNIN",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins-Bold",
-                                        fontSize: 18,
-                                        letterSpacing: 1.0)),
+                                },
+                                child: Center(
+                                  child: Text("SIGNIN",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: "Poppins-Bold",
+                                          fontSize: 18,
+                                          letterSpacing: 1.0)),
+                                ),
                               ),
                             ),
                           ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(40),
+                    ),
+                    horizontalLine(),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(40),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "New User? ",
+                          style: TextStyle(fontFamily: "Poppins-Medium"),
                         ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(40),
-                  ),
-                  horizontalLine(),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(40),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "New User? ",
-                        style: TextStyle(fontFamily: "Poppins-Medium"),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          widget.toggleView();
-                        },
-                        child: Text("Register",
-                            style: TextStyle(
-                                color: Color(0xFF5d74e3),
-                                fontFamily: "Poppins-Bold")),
-                      )
-                    ],
-                  )
-                ],
+                        InkWell(
+                          onTap: () {
+                            widget.toggleView();
+                          },
+                          child: Text("Register",
+                              style: TextStyle(
+                                  color: Color(0xFF5d74e3),
+                                  fontFamily: "Poppins-Bold")),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
