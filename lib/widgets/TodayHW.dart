@@ -9,7 +9,7 @@ const int animationMilliseconds = 500;
 class Homework extends StatefulWidget {
   final Function onTap;
   final Function onDeleteTask;
-  final List<Model.Homework> homeworks;
+  final List<Model.HomeworkData> homeworks;
 
   Homework({@required this.homeworks, this.onTap, this.onDeleteTask});
 

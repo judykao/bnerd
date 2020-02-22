@@ -1,7 +1,8 @@
 import 'package:bnerd/pages/home/settingsForm.dart';
 import 'package:bnerd/services/database.dart';
-import 'package:bnerd/services/homework_database.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:bnerd/services/homework_database.dart';
+import 'package:bnerd/widgets/add.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bnerd/widgets/Todo.dart';
@@ -30,10 +31,10 @@ class _HomeState extends State<Home> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser user;
 
-  final homeworkdata = Firestore.instance;
+
+
 
   @override
-
   void initState() {
     // TODO: implement initState
     initUser();
@@ -51,19 +52,28 @@ class _HomeState extends State<Home> {
   String welcomeMsg;
   List<Model.Todo> todos;
   List<Model.Todo> dones;
+
   //List<Model.Homework> homeworks;
 
 
-
   void _showSettingsPanel() {
-    showModalBottomSheet(context: context,builder: (context) {
+    showModalBottomSheet(context: context, builder: (context) {
       return Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
         child: SettingsForm(),
       );
     });
-
   }
+
+  void _showAddingPanel() {
+    showModalBottomSheet(context: context, builder: (context) {
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+        child: Add(),
+      );
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +143,8 @@ class _HomeState extends State<Home> {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: NetworkImage('https://i.pinimg.com/564x/74/f1/59/74f159a8aebaa53a5fb139397ec3ff61.jpg'),
+                    image: NetworkImage(
+                        'https://i.pinimg.com/564x/74/f1/59/74f159a8aebaa53a5fb139397ec3ff61.jpg'),
                   ),
                 ),
               ),
@@ -142,7 +153,8 @@ class _HomeState extends State<Home> {
                 trailing: Icon(Icons.lightbulb_outline),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => Toodo()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => Toodo()));
                 },
               ),
               ListTile(
@@ -150,7 +162,8 @@ class _HomeState extends State<Home> {
                 trailing: Icon(Icons.archive),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => Archive()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => Archive()));
                 },
               ),
               Divider(),
@@ -170,8 +183,8 @@ class _HomeState extends State<Home> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            _settingModalBottomSheet(context);
+          onPressed: ()  {
+            _showAddingPanel();
           },
           child: Icon(Icons.add),
           backgroundColor: Colors.grey[700],
@@ -227,91 +240,4 @@ class _HomeState extends State<Home> {
     getTodosAndDones();
   }
 
-  void createData() async {
-    await homeworkdata.collection("homework")
-        .document("1")
-        .setData({
-      'date': 'date',
-      'subject': 'subject',
-      'type': 'type',
-      'content': 'content',
-      'note': 'note',
-    });
-  }
-
-//get資料
-  void getData() {
-    homeworkdata
-        .collection("homework")
-        .getDocuments()
-        .then((QuerySnapshot snapshot) {
-      snapshot.documents.forEach((f) => print('${f.data}}'));
-    });
-  }
-
-//更新資料
-  void updateData() {
-    try {
-      homeworkdata
-          .collection('homework')
-          .document('1')
-          .updateData({'description': 'Head First Flutter'});
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
-//刪除資料
-  void deleteData() {
-    try {
-      homeworkdata
-          .collection('homework')
-          .document('1')
-          .delete();
-    } catch (e) {
-      print(e.toString());
-    }
-  }
 }
-
-Future<void> _settingModalBottomSheet(BuildContext context) async {
-  await HomeworkDataBaseService().createHomeworkData('date', 'subject', 'type', 'content', 'note');
-  showModalBottomSheet(
-      context: context,
-      builder: (BuildContext bc){
-        return Container(
-          child: new Wrap(
-            children: <Widget>[
-              new ListTile(
-                  leading: new Icon(Icons.date_range),
-                  title: new Text('${DateTime.now()}'),
-                  onTap: () => {
-                    showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2030),
-                      builder: (BuildContext context, Widget child) {
-                        return Theme(
-                          data: ThemeData.dark(),
-                          child: child,
-                        );
-                      },
-                    ),
-                    /// 寫完讓widget 跑出來但還沒有取值
-                  }
-              ),
-              new ListTile(
-                leading: new Icon(Icons.merge_type),
-                title: new Text('Type'),
-                onTap: () => {
-                  ///觸發下拉選單，可以設定類型
-                },
-              ),
-            ],
-          ),
-        );
-      }
-  );
-}
-

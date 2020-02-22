@@ -1,13 +1,31 @@
 enum HomeworkStatus { active, done }
+enum Type { hw, test, note }
 
 class Homework {
+
+  final String uid;
+  Homework({ this.uid });
+
+
+}
+
+class HomeworkData {
+
+  final String uid;
   int id;
+  DateTime date;
+  String subject;
+  int type;
+  String content;
+  String note;
   String title;
   DateTime created;
   DateTime updated;
   int status;
 
-  Homework({this.id, this.title, this.created, this.updated, this.status});
+  HomeworkData({this.uid, this.id, this.date, this.subject, this.type, this.content, this.note, this.title, this.created, this.updated, this.status});
+
+
 
   Map<String, dynamic> toMap() {
     return {
@@ -27,6 +45,8 @@ class Homework {
       'status': HomeworkStatus.active.index,
     };
   }
+
+
 
 
 }
