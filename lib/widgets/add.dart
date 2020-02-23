@@ -4,6 +4,7 @@ import 'package:bnerd/shared/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:bnerd/shared/load.dart';
 import 'package:bnerd/model/hw_model.dart';
+import 'package:bnerd/model/homework.dart';
 
 class Add extends StatefulWidget {
   @override
@@ -18,7 +19,6 @@ class _AddState extends State<Add> {
   //form values
   String _currentSubject;
   String _currentContent;
-  //String _currentNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,9 @@ class _AddState extends State<Add> {
 
     String dropdownType = 'Homework';
 
-    return StreamBuilder<HomeworkData>(
+    return StreamProvider<List<HW>>.value(
+      value: HomeworkDataBaseService().homeworks,
+      child: StreamBuilder<HomeworkData>(
         stream: HomeworkDataBaseService(uid: homework.uid).homeworkData,
         builder: (context, snapshot) {
           if(snapshot.hasData){
@@ -138,6 +140,7 @@ class _AddState extends State<Add> {
             return Loading();
           }
         }
+      )
     );
   }
 }

@@ -4,6 +4,8 @@ import 'package:bnerd/shared/constants.dart';
 import 'package:bnerd/model/user.dart';
 import 'package:provider/provider.dart';
 import 'package:bnerd/shared/load.dart';
+import 'package:bnerd/model/bnerd.dart';
+
 
 class SettingsForm extends StatefulWidget {
   @override
@@ -25,7 +27,9 @@ class _SettingsFormState extends State<SettingsForm> {
 
     final user = Provider.of<User>(context);
 
-    return StreamBuilder<UserData>(
+    return StreamProvider<List<Bnerd>>.value(
+      value: DataBaseService().users,
+      child: StreamBuilder<UserData>(
         stream: DataBaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
           if(snapshot.hasData){
@@ -85,6 +89,7 @@ class _SettingsFormState extends State<SettingsForm> {
             return Loading();
           }
         }
+      )
     );
   }
 }

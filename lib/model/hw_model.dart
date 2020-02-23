@@ -1,5 +1,5 @@
 enum HomeworkStatus { active, done }
-enum Type { hw, test, note }
+//enum HomeworkType { hw, test, note }
 
 class Homework {
 
@@ -12,16 +12,16 @@ class Homework {
 class HomeworkData {
 
   final String uid;
-  int id;
-  DateTime date;
-  String subject;
-  int type;
-  String content;
-  String note;
-  String title;
-  DateTime created;
-  DateTime updated;
-  int status;
+  final int id;
+  final DateTime date;
+  final String subject;
+  final String type;
+  final String content;
+  final String note;
+  final String title;
+  final DateTime created;
+  final DateTime updated;
+  final int status;
 
   HomeworkData({this.uid, this.id, this.date, this.subject, this.type, this.content, this.note, this.title, this.created, this.updated, this.status});
 

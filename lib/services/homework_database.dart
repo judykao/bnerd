@@ -1,5 +1,6 @@
 import 'package:bnerd/model/hw_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bnerd/model/homework.dart';
 
 class HomeworkDataBaseService {
 
@@ -21,6 +22,23 @@ class HomeworkDataBaseService {
       'content': content,
       'note': note,
     });
+  }
+
+  List<HW> _HWListFromSnapshot(QuerySnapshot snapshot){
+    return snapshot.documents.map((doc){
+      return HW(
+        date: doc.data['date'] ?? '',
+        subject: doc.data['subject'] ?? '',
+        type: doc.data['type'] ?? '',
+        content: doc.data['content'] ?? '',
+        note: doc.data['note'] ?? '',
+      );
+    }).toList();
+  }
+
+  Stream<List<HW>> get homeworks {
+    return homeworkCollection.snapshots()
+        .map(_HWListFromSnapshot);
   }
 
   HomeworkData _homeworkDataFromSnapshot(DocumentSnapshot snapshot) {
