@@ -1,8 +1,5 @@
 import 'package:bnerd/pages/home/settingsForm.dart';
-//import 'package:bnerd/services/database.dart';
-//import 'package:bnerd/services/homework_database.dart';
-import 'package:bnerd/widgets/add.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bnerd/widgets/addHw.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bnerd/widgets/Todo.dart';
@@ -14,8 +11,6 @@ import 'package:bnerd/widgets/done.dart';
 import 'package:bnerd/model/db_wrapper.dart';
 import 'package:bnerd/widgets/popup.dart';
 import 'package:bnerd/pages/To-Do.dart';
-//import 'package:provider/provider.dart';
-//import 'package:bnerd/model/bnerd.dart';
 import 'package:bnerd/widgets/TodayHW.dart';
 import 'package:bnerd/model/hw_model.dart' as Model;
 
@@ -68,8 +63,8 @@ class _HomeState extends State<Home> {
   void _showAddingPanel() {
     showModalBottomSheet(context: context, builder: (context) {
       return Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-        child: Add(),
+        padding: EdgeInsets.symmetric(vertical: 35.0, horizontal: 60.0),
+        child: Addhomework(),
       );
     });
   }
@@ -88,41 +83,43 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: Container(
-        child: GestureDetector(
-          onTap: () {
-            Utils.hideKeyboard(context);
-          },
-          child: Column(
-            children: <Widget>[
-              Stack(
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(top: 20),
-                        child: TaskInput(
-                          onSubmitted: addTaskInTodo,
-                        ), // Add Todos
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Homework(
-                //homeworks: homeworks,
-              ),
-              Todo(
-                todos: todos,
-                onTap: markTodoAsDone,
-                onDeleteTask: deleteTask,
-              ),
-              Done(
-                dones: dones,
-                onTap: markDoneAsTodo,
-                onDeleteTask: deleteTask,
-              ),
-            ],
+      body: SingleChildScrollView(
+        child: Container(
+          child: GestureDetector(
+            onTap: () {
+              Utils.hideKeyboard(context);
+            },
+            child: Column(
+              children: <Widget>[
+                Stack(
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(top: 20),
+                          child: TaskInput(
+                            onSubmitted: addTaskInTodo,
+                          ), // Add Todos
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Homework(
+                  //homeworks: homeworks,
+                ),
+                Todo(
+                  todos: todos,
+                  onTap: markTodoAsDone,
+                  onDeleteTask: deleteTask,
+                ),
+                Done(
+                  dones: dones,
+                  onTap: markDoneAsTodo,
+                  onDeleteTask: deleteTask,
+                ),
+              ],
+            ),
           ),
         ),
       ),

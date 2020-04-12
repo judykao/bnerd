@@ -14,13 +14,12 @@ class HomeworkDataBaseService {
   final homeworkdata = Firestore.instance;
 
   Future createHomeworkData(String date, String subject, String type,
-      String content, String note) async {
+      String content) async {
     return await homeworkCollection.document().setData({
       'date': date,
       'subject': subject,
       'type': type,
       'content': content,
-      'note': note,
     });
   }
 

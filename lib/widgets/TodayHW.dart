@@ -46,7 +46,7 @@ class _HomeworkState extends State<Homework> {
                         : showCompletedTaskAnimation ? 0 : 1,
                     duration: Duration(seconds: 1),
                     child: getTaskItem(
-                      widget.homeworks[i].title,
+                      widget.homeworks[i].content,
                       index: i,
                       onTap: () {
                         setState(() {
