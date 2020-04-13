@@ -34,7 +34,7 @@ dependencies:
   provider: ^4.0.2
   flutter_spinkit: ^4.1.1+1
   google_sign_in: ^3.2.4
-
+  keyboard_avoider: 0.1.2
 
   rxdart: 0.20.0
 
