@@ -12,21 +12,20 @@ class Homework {
 class HomeworkData {
 
   final String uid;
-  //final int id;
+  final int id;
   final DateTime date;
   final String subject;
   final String type;
   final String content;
-  final String note;
-  //final String title;
-  //final DateTime created;
-  //final DateTime updated;
-  //final int status;
+  final String title;
+  final DateTime created;
+  final DateTime updated;
+  final int status;
 
-  //HomeworkData({this.uid, this.id, this.date, this.subject, this.type, this.content, this.note, this.title, this.created, this.updated, this.status});
-  HomeworkData({this.uid, this.date, this.subject, this.type, this.content, this.note});
+  HomeworkData({this.uid, this.id, this.date, this.subject, this.type, this.content, this.title, this.created, this.updated, this.status});
 
-  /*
+
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -48,8 +47,5 @@ class HomeworkData {
 
 
 
-   */
-
 
 }
-

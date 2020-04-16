@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:bnerd/widgets/shared.dart';
 import 'package:bnerd/model/hw_model.dart' as Model;
 import 'package:bnerd/utils/colors.dart';
@@ -9,7 +9,7 @@ const int animationMilliseconds = 500;
 class Homework extends StatefulWidget {
   final Function onTap;
   final Function onDeleteTask;
-  final List<Model.HomeworkData> homeworks;
+  final List<Model.Homework> homeworks;
 
   Homework({@required this.homeworks, this.onTap, this.onDeleteTask});
 
@@ -132,3 +132,4 @@ class _HomeworkState extends State<Homework> {
         ));
   }
 }
+*/

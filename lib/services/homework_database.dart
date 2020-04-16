@@ -4,17 +4,17 @@ import 'package:bnerd/model/homework.dart';
 
 class HomeworkDataBaseService {
 
-  final String uid;
+  final dynamic docuid;
 
-  HomeworkDataBaseService({ this.uid });
+  HomeworkDataBaseService({this.docuid });
 
   //collection reference
   final CollectionReference homeworkCollection = Firestore.instance.collection(
       'homework');
   final homeworkdata = Firestore.instance;
 
-  Future createHomeworkData(String date, String subject, String type,
-      String content) async {
+  Future createHomeworkData(String date, String subject, String type, String content) async {
+    //if()
     return await homeworkCollection.document().setData({
       'date': date,
       'subject': subject,
@@ -30,7 +30,6 @@ class HomeworkDataBaseService {
         subject: doc.data['subject'] ?? '',
         type: doc.data['type'] ?? '',
         content: doc.data['content'] ?? '',
-        note: doc.data['note'] ?? '',
       );
     }).toList();
   }
@@ -42,20 +41,20 @@ class HomeworkDataBaseService {
 
   HomeworkData _homeworkDataFromSnapshot(DocumentSnapshot snapshot) {
     return HomeworkData(
-      uid: uid,
+      uid: docuid,
       date: snapshot.data['date'],
       subject: snapshot.data['subject'],
       type: snapshot.data['type'],
       content: snapshot.data['content'],
-      note: snapshot.data['note'],
     );
   }
 
   Stream<HomeworkData> get homeworkData {
-    return homeworkCollection.document(uid).snapshots()
+    return homeworkCollection.document(docuid).snapshots()
         .map(_homeworkDataFromSnapshot);
 
   }
+
   void createData() async {
     await homeworkdata.collection("homework")
         .document("1")
@@ -64,7 +63,6 @@ class HomeworkDataBaseService {
       'subject': 'subject',
       'type': 'type',
       'content': 'content',
-      'note': 'note',
     });
   }
 
@@ -102,7 +100,3 @@ class HomeworkDataBaseService {
     }
   }
 }
-
-
-  ///然後在要創建的按鈕的widget那邊加這行：
-  ///await HomeworkDataBaseService().createHomeworkData('date', 'subject', 'type', 'content', 'note');

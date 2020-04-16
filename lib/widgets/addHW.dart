@@ -13,12 +13,11 @@ class _AddhomeworkState extends State<Addhomework> {
   final _formKey = GlobalKey<FormState> ();
   String _currentSubject;
   String _currentContent;
+  DateTime _dateTime;
+  String _dropdownType = 'Homework';
 
   @override
   Widget build(BuildContext context) {
-
-    DateTime _dateTime;
-    String dropdownType = 'Homework';
 
     return KeyboardAvoider(
       autoScroll: true,
@@ -65,12 +64,12 @@ class _AddhomeworkState extends State<Addhomework> {
                       Text('Type'),
                       SizedBox(width: 50.0),
                       DropdownButton<String>(
-                        value: dropdownType,
+                        value: _dropdownType,
                         icon: Icon(Icons.arrow_downward), iconSize: 24,
                         elevation: 16,
                         style: TextStyle(color: Colors.deepPurple), underline: Container(height: 2, color: Colors.deepPurpleAccent, ),
                         onChanged: (String newValue) {
-                          setState(() {dropdownType = newValue;});},
+                          setState(() {_dropdownType = newValue;});},
                         items: <String>['Homework', 'Test', 'Other'].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -86,7 +85,12 @@ class _AddhomeworkState extends State<Addhomework> {
                     //title: Text('Subject',style: TextStyle(fontSize: 15.0),),
                     subtitle: TextFormField(
                       decoration: textInputDecoration.copyWith(hintText: 'Subject'),
-                      validator: (val) => val.isEmpty ? 'Please enter a subject' : null,
+                      validator: (val) {
+                        if (val.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
                       onChanged: (val) => setState(() => _currentSubject = val),
                     ),
                   ),
@@ -96,7 +100,12 @@ class _AddhomeworkState extends State<Addhomework> {
                     //title: Text('Content',style: TextStyle(fontSize: 15.0),),
                     subtitle: TextFormField(
                       decoration: textInputDecoration.copyWith(hintText: 'Content'),
-                      validator: (val) => val.isEmpty ? 'Please enter a content' : null,
+                      validator: (val) {
+                        if (val.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
                       onChanged: (val) => setState(() => _currentContent = val),
                     ),
                   ),
@@ -108,11 +117,15 @@ class _AddhomeworkState extends State<Addhomework> {
                       'Create',
                       style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () async {
-                      if(_formKey.currentState.validate()) {
-                        await HomeworkDataBaseService().createHomeworkData('$_dateTime', '$_currentSubject', '$dropdownType', '$_currentContent');
-                        Navigator.pop(context);
-                      }
+                    onPressed: ()  {
+                      print(_dateTime);
+                      print(_currentSubject);
+                      print(_dropdownType);
+                      print(_currentContent);
+                      //if(_formKey.currentState.validate()) {
+                      HomeworkDataBaseService().createHomeworkData('$_dateTime', '$_currentSubject', '$_dropdownType', '$_currentContent');
+                      Navigator.pop(context);
+                      //}
                     },
                   ),
                 ]
