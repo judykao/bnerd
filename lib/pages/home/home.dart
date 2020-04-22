@@ -1,7 +1,6 @@
 import 'package:bnerd/model/homework.dart';
 import 'package:bnerd/model/hw_model.dart';
 import 'package:bnerd/pages/home/settingsForm.dart';
-import 'package:bnerd/pages/homework_list.dart';
 import 'package:bnerd/services/homework_database.dart';
 import 'package:bnerd/widgets/addHw.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,6 +16,7 @@ import 'package:bnerd/widgets/popup.dart';
 //import 'package:bnerd/widgets/TodayHW.dart';
 import 'package:bnerd/model/hw_model.dart' as Model;
 import 'package:provider/provider.dart';
+import 'package:bnerd/pages/home/homeworklist.Dart';
 
 class Home extends StatefulWidget {
 
