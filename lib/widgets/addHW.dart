@@ -1,7 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bnerd/shared/constants.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:bnerd/services/homework_database.dart';
+import 'package:bnerd/shared/load.dart';
+
+final List<String> id = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25'];
+int i = 0;
+int doc;
 
 class Addhomework extends StatefulWidget {
   @override
@@ -9,17 +15,22 @@ class Addhomework extends StatefulWidget {
 }
 
 class _AddhomeworkState extends State<Addhomework> {
-
+  
+  
   final _formKey = GlobalKey<FormState> ();
   String _currentSubject;
   String _currentContent;
   DateTime _dateTime;
   String _dropdownType = 'Homework';
+  bool loading = false;
+  
 
   @override
   Widget build(BuildContext context) {
-
-    return KeyboardAvoider(
+  return StreamBuilder(
+    stream:Firestore.instance.collection('homework').snapshots(),
+ builder: (context,snapshot){
+    return loading ? Loading(): KeyboardAvoider(
       autoScroll: true,
       child: Form(
         child: SingleChildScrollView(
@@ -123,7 +134,12 @@ class _AddhomeworkState extends State<Addhomework> {
                       print(_dropdownType);
                       print(_currentContent);
                       //if(_formKey.currentState.validate()) {
-                      HomeworkDataBaseService().createHomeworkData('$_dateTime', '$_currentSubject', '$_dropdownType', '$_currentContent');
+                      //Homeworkdata ref = await 
+                      HomeworkDataBaseService(docuid: id[i]).createHomeworkData('$_dateTime', '$_currentSubject', '$_dropdownType', '$_currentContent');
+                      setState(() => loading = true);
+                      doc = i;
+                      print(doc);
+                      i+=1;
                       Navigator.pop(context);
                       //}
                     },
@@ -133,5 +149,16 @@ class _AddhomeworkState extends State<Addhomework> {
         ),
       ),
     );
+   }
+   ); 
   }
 }
+// final homeworkdata = Firestore.instance;
+// void _getdata() {
+//      homeworkdata
+//      .collection("homework")
+//       .getDocuments()
+//       .then((QuerySnapshot snapshot) {
+//     snapshot.documents.forEach((f) => print('${f.data}}'));
+//   });
+// }

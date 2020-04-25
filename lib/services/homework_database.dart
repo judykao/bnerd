@@ -1,28 +1,32 @@
 import 'package:bnerd/model/hw_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bnerd/model/homework.dart';
+import 'package:bnerd/widgets/addHW.dart';
 
+// final List<String> id = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25'];
+// int i = 0;
 class HomeworkDataBaseService {
 
-  final dynamic docuid;
+  final String docuid;
 
   HomeworkDataBaseService({this.docuid });
-
+  
+  
   //collection reference
   final CollectionReference homeworkCollection = Firestore.instance.collection(
       'homework');
   final homeworkdata = Firestore.instance;
-
   Future createHomeworkData(String date, String subject, String type, String content) async {
-    //if()
-    return await homeworkCollection.document().setData({
+    return await homeworkCollection.document(id[i]).setData(
+      {
       'date': date,
       'subject': subject,
       'type': type,
       'content': content,
-    });
+      },
+    );
   }
-
+  
   List<HW> _HWListFromSnapshot(QuerySnapshot snapshot){
     return snapshot.documents.map((doc){
       return HW(
@@ -53,50 +57,5 @@ class HomeworkDataBaseService {
     return homeworkCollection.document(docuid).snapshots()
         .map(_homeworkDataFromSnapshot);
 
-  }
-
-  void createData() async {
-    await homeworkdata.collection("homework")
-        .document("1")
-        .setData({
-      'date': 'date',
-      'subject': 'subject',
-      'type': 'type',
-      'content': 'content',
-    });
-  }
-
-//get資料
-  void getData() {
-    homeworkdata
-        .collection("homework")
-        .getDocuments()
-        .then((QuerySnapshot snapshot) {
-      snapshot.documents.forEach((f) => print('${f.data}}'));
-    });
-  }
-
-//更新資料
-  void updateData() {
-    try {
-      homeworkdata
-          .collection('homework')
-          .document('1')
-          .updateData({'description': 'Head First Flutter'});
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
-//刪除資料
-  void deleteData() {
-    try {
-      homeworkdata
-          .collection('homework')
-          .document('1')
-          .delete();
-    } catch (e) {
-      print(e.toString());
-    }
   }
 }

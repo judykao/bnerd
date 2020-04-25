@@ -3,11 +3,10 @@ enum HomeworkStatus { active, done }
 
 class Homework {
 
-  final String uid;
-  Homework({ this.uid });
-
-
+  final String docuid;
+  Homework({ this.docuid });
 }
+
 
 class HomeworkData {
 
