@@ -4,8 +4,8 @@ class HW {
   final String subject;
   final int type;
   final String content;
-  HW({ this.date, this.subject, this.type, this.content,});
 
+  HW({ this.date, this.subject, this.type, this.content,});
 }
 
 class HomeWorkData {
@@ -15,5 +15,6 @@ class HomeWorkData {
   final int type;
   final String content;
   HomeWorkData({ this.docuid,this.date, this.subject, this.type, this.content,});
+
 
 }
