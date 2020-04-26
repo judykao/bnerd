@@ -1,22 +1,15 @@
-import 'package:bnerd/model/hw_model.dart';
+
+import 'package:bnerd/shared/load.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:bnerd/model/homework.dart';
-import 'package:provider/provider.dart';
-import 'package:bnerd/services/homework_database.dart';
-
 
 class HomeworkList extends StatefulWidget {
 
-  // final HW homework;
-  // HomeworkList({this.homework});
   @override
   _HomeworkListState createState() => _HomeworkListState();
 }
 
 class _HomeworkListState extends State<HomeworkList> {
-  //final homeworkdata = Firestore.instance;
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,27 +20,33 @@ class _HomeworkListState extends State<HomeworkList> {
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return new Text("Loading");
+            return Loading();
           } else {
             Map<String, dynamic> documentFields = snapshot.data.data;
-               return Material(
-                  child: ListView(
-                    children: <Widget>[
-                      ListTile(
-                        leading: Icon(Icons.book),
-                        title: Text('Homework1'),
-                        subtitle: Column(
-                          children: <Widget>[
-                            Text('$documentFields')
-                          ],
-                        ),
-                        //trailing: Icon(Icons.dehaze),
-                        isThreeLine: true,
-                        //selected: true,
-                      ),
-                    ],
-                  ),
-                );
+               return Scaffold(
+                 appBar: AppBar(
+                   title: Text('Homeworks'),
+                   backgroundColor: Color(0xff4598a2),
+                 ),
+                 body:Container(
+                   padding: EdgeInsets.all(10.0),
+                   child: ListView(
+                     children: <Widget>[
+                       ListTile(
+                         leading: Icon(Icons.book),
+                         title: Text('Homework1'),
+                         subtitle: Column(
+                           children: <Widget>[
+                             Text('$documentFields')
+                           ],
+                         ),
+                         isThreeLine: true,
+                         //selected: true,
+                       ),
+                     ],
+                   ),
+                 ),
+               );
              }
           }
         );

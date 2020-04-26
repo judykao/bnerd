@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class TodosColor {
-  static const kPrimaryColorCode = 0xffca3e47;
-  static const kSecondaryColorCode = 0xff34465d;
-  static const kThirdColorCode = 0xff0f15a0e;
+  static const kPrimaryColorCode = 0xffe12e4b;
+  static const kSecondaryColorCode = 0xff4598a2;
+  static const kThirdColorCode = 0xffff9813;
 
   static TodosColor sharedInstance = TodosColor._();
 
@@ -22,9 +22,9 @@ class TodosColor {
       case 0:
         return Colors.amber[900];
       case 1:
-        return Colors.cyan[900];
+        return Colors.amber[800];
       case 2:
-        return Colors.blue[900];
+        return Colors.amber[700];
     }
 
     if (pos < storedColors.length) {
